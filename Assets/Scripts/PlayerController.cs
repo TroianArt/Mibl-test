@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 firstClickPosition;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             Vector3 moveDirestion = (Quaternion.Euler(90, 0, 0) * (Input.mousePosition - firstClickPosition)).normalized;
-            rigidbody.MovePosition(transform.position + moveDirestion * speed);
+            rigidbody.MovePosition(transform.position + moveDirestion * Time.deltaTime * speed);
+            //transform.LookAt(transform.position + moveDirestion);
         }
     }
 }
