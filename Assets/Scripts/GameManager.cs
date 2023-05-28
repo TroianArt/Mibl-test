@@ -14,8 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
 
     private DateTime startTime;
+    private bool isGame;
 
     public Player Player => player;
+    public bool IsGame => isGame;
 
     private void Awake()
     {
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         startTime = DateTime.UtcNow;
         player.OnDied += PlayerDied;
+        isGame = true;
     }
 
     public void Restart()
@@ -33,17 +36,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void PlayerDied()
     {
         player.OnDied -= PlayerDied;
 
+        isGame = false;
         OnEnd?.Invoke(DateTime.UtcNow - startTime);
-
     }
 
     private void OnDestroy()

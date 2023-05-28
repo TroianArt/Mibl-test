@@ -9,6 +9,8 @@ public class Entity : MonoBehaviour
     public event Action OnDied;
 
     [SerializeField] protected int healthPoints;
+    [SerializeField] protected ParticleSystem effect;
+    [SerializeField] protected bool spawnEffectOnDie;
 
     protected int startHealthPoints;
     protected Player player;
@@ -37,12 +39,17 @@ public class Entity : MonoBehaviour
     protected void Die()
     {
         OnDied?.Invoke();
+
+        if (spawnEffectOnDie)
+        {
+            Instantiate(effect, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 
     protected void Die(TimeSpan timeSpan)
     {
-        OnDied?.Invoke();
-        Destroy(gameObject);
+        Die();
     }
 }

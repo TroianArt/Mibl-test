@@ -21,6 +21,6 @@ public class GameEndWindow : MonoBehaviour
     public void ShowWindow(TimeSpan timeSpan)
     {
         gameObject.SetActive(true);
-        duration.text = timeSpan.TotalSeconds.ToString();
+        duration.text = ((int)timeSpan.TotalSeconds).ToString();
     }
 }

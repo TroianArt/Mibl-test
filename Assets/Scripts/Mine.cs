@@ -11,7 +11,7 @@ public class Mine : Entity
         if(collider.gameObject.TryGetComponent<Entity>(out var entity))
         {
             entity.TakeDamage(damage);
-            Destroy(gameObject);
+            Die();
         }
     }
 }

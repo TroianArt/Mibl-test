@@ -11,16 +11,18 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetMouseButtonDown(0))
         {
             firstClickPosition = Input.mousePosition;
         }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetMouseButton(0))
         {
-            Vector3 moveDirestion = (Quaternion.Euler(90, 0, 0) * (Input.mousePosition - firstClickPosition)).normalized;
-            rigidbody.MovePosition(transform.position + moveDirestion * Time.deltaTime * speed);
-            //transform.LookAt(transform.position + moveDirestion);
+            Vector3 difference = Input.mousePosition - firstClickPosition;
+            Vector3 move = new Vector3(difference.x, transform.position.y, difference.y).normalized;
+
+            transform.LookAt(transform.position + move);
+            rigidbody.MovePosition(transform.position + move * Time.deltaTime * speed);
         }
     }
 }
