@@ -23,6 +23,8 @@ public class Camera : MonoBehaviour
 
     private void Follow()
     {
+        if (target == null) return;
+
         transform.position = Vector3.SmoothDamp(transform.position, target.position + offset, ref velocity, speed);
     }
 }
